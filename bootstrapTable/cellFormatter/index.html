@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>Bootstrap Table</title>
+
+<!-- reference => http://bootstrap-table.wenzhixin.net.cn/getting-started/ -->
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.10.1/bootstrap-table.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.6/cerulean/bootstrap.min.css">
+
+
+
+
+	
+</head>
+<body>
+
+ <div id="toolbar">
+ </div>
+
+<table id="boot-table" data-toolbar="#toolbar" data-height="460"
+               data-pagination="true"
+               data-search="true"
+               data-click-to-select="true" >
+</table>
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha/js/bootstrap.min.js"></script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.10.1/bootstrap-table.js"></script>
+
+
+
+<script type='text/JavaScript'>
+
+ 
+$(function () {
+
+	
+	var BS = {};
+
+	BS.table = {
+
+		init: function(){
+
+
+			    $('#boot-table').bootstrapTable({
+			        url: 'data.json',
+			        columns: [{
+			          field: 'id',
+			          title: 'Item ID'
+
+			      }, {
+			          field: 'name',
+			          title: 'Item Name',
+			          formatter: BS.table.itemNameFmt
+			        
+			      }, {
+			          field: 'price',
+			          title: 'Item Price',
+			           formatter: BS.table.priceFmt
+			         
+			      }]
+			    });
+
+		
+
+		},
+
+		itemNameFmt : function(value, row, index) {
+			return '<i class="glyphicon glyphicon-star"></i> ' + value;
+ 		 },
+
+
+	   priceFmt : function(value, row, index){
+	    return "$" + value;
+	  	}
+
+	}
+
+
+	BS.table.init();
+
+
+});
+
+</script>
+
+
+</body>
+</html>
