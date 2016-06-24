@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>Bootstrap Table</title>
+
+<!-- reference => http://bootstrap-table.wenzhixin.net.cn/getting-started/ -->
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.10.1/bootstrap-table.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.6/cerulean/bootstrap.min.css">
+
+
+
+
+	
+</head>
+<body>
+
+ <div id="toolbar">
+
+ <button id="insertRowBtn">Insert Row</button>
+ </div>
+
+<table id="boot-table" data-toolbar="#toolbar" data-height="460"
+               data-pagination="true"
+               data-search="true"
+               data-click-to-select="true" >
+</table>
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha/js/bootstrap.min.js"></script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.10.1/bootstrap-table.js"></script>
+
+
+
+<script type='text/JavaScript'>
+
+ 
+$(function () {
+
+	
+	window.BS = {};
+
+	BS.table = {
+
+		init: function(){
+
+			 	this.instance = $('#boot-table');
+
+
+			    this.instance.bootstrapTable({
+			        url: 'data.json',
+			        columns: [{
+			          field: 'id',
+			          title: 'Item ID'
+
+			      }, {
+			          field: 'name',
+			          title: 'Item Name',
+			          formatter: BS.table.itemNameFmt
+			        
+			      }, {
+			          field: 'price',
+			          title: 'Item Price',
+			           formatter: BS.table.priceFmt
+			         
+			      }]
+			    });
+
+
+
+
+			    //Init Events
+			    this.insertRowEvt();
+
+		
+
+		},
+
+		itemNameFmt : function(value, row, index) {
+			return '<input class="form-control" value=" ' + value +'"></input>';
+ 		 },
+
+
+	   priceFmt : function(value, row, index){
+	    return "$" + value;
+	  	},
+
+	  	insertRowEvt : function(){
+
+	  		let that = this;
+
+
+	  		$("#insertRowBtn").click(function (event) {
+            
+            var randomId = 100 + ~~(Math.random() * 100);
+
+	           that.instance.bootstrapTable('insertRow', {
+	                index: 0,
+	                row: {
+	                    id: randomId,
+	                    name: 'Item ' + randomId,
+	                    price:  randomId
+	                }
+	            });
+  
+        	});
+
+
+
+	  
+
+	  	}
+
+	}
+
+
+	BS.table.init();
+	
+
+
+});
+
+</script>
+
+
+</body>
+</html>
